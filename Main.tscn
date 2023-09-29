@@ -1,3 +1,22 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
 
-[node name="Main" type="Node2D"]
+[ext_resource path="res://main.gd" type="Script" id=1]
+
+[node name="MainScreen" type="Node2D"]
+
+[node name="Play" type="Button" parent="."]
+margin_left = 398.0
+margin_top = 81.0
+margin_right = 657.0
+margin_bottom = 214.0
+text = "Play"
+
+[node name="Quit" type="Button" parent="."]
+margin_left = 401.0
+margin_top = 286.0
+margin_right = 660.0
+margin_bottom = 419.0
+text = "Quit"
+script = ExtResource( 1 )
+
+[connection signal="pressed" from="Quit" to="Quit" method="_on_Quit_pressed"]
