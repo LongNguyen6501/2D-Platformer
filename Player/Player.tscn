@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://sprites/player/idle/player-idle-4.png" type="Texture" id=1]
 [ext_resource path="res://sprites/player/idle/player-idle-2.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://sprites/player/run/player-run-6.png" type="Texture" id=17]
 [ext_resource path="res://sprites/player/hurt/player-hurt-2.png" type="Texture" id=18]
 [ext_resource path="res://sprites/player/climb/player-climb-2.png" type="Texture" id=19]
+[ext_resource path="res://Player/Player.gd" type="Script" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.5, 11 )
@@ -56,7 +57,12 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 2, 1 )
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.5, 1 )
@@ -66,3 +72,4 @@ shape = SubResource( 1 )
 position = Vector2( 1, -4 )
 frames = SubResource( 2 )
 animation = "Idle"
+playing = true
