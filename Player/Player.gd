@@ -5,9 +5,8 @@ var face = 1
 var jump_speed = -800
 var gravity = 4000
 var velocity = Vector2.ZERO
-var dashSpeed = 3000
+var dash_speed = 3000
 
-#movements
 func _physics_process(delta):
 	#player idle velocity =0
 	velocity.x = 0
@@ -20,7 +19,7 @@ func _physics_process(delta):
 		velocity.x += speed * face
 	#dash mechanism
 	if Input.is_action_just_pressed("ui_dash"):
-		velocity.x += dashSpeed * face
+		velocity.x += dash_speed * face
 	#player gravity code
 	velocity.y += gravity * delta
 	#allows player movements
@@ -29,4 +28,4 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_jump"):
 		if is_on_floor():
 			velocity.y = jump_speed
-
+	
