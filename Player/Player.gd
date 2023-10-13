@@ -1,10 +1,11 @@
 extends KinematicBody2D
 #declare variable
 var speed = 200
+var face = 1
 var jump_speed = -800
 var gravity = 4000
 var velocity = Vector2.ZERO
-var dashSpeed = 10
+var dashSpeed = 3000
 
 #movements
 func _physics_process(delta):
@@ -12,9 +13,14 @@ func _physics_process(delta):
 	velocity.x = 0
 	#go left and right
 	if Input.is_action_pressed("ui_right"):
-		velocity.x += speed
+		face = 1
+		velocity.x += speed * face
 	if Input.is_action_pressed("ui_left"):
-		velocity.x -= speed
+		face = -1
+		velocity.x += speed * face
+	#dash mechanism
+	if Input.is_action_just_pressed("ui_dash"):
+		velocity.x += dashSpeed * face
 	#player gravity code
 	velocity.y += gravity * delta
 	#allows player movements
@@ -23,3 +29,4 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_jump"):
 		if is_on_floor():
 			velocity.y = jump_speed
+
