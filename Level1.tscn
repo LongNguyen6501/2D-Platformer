@@ -25,4 +25,10 @@ position = Vector2( 1094, 238 )
 shape = SubResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 328, 107 )
+position = Vector2( 211, 323 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 19.0
+margin_top = 426.0
+margin_right = 1002.0
+margin_bottom = 545.0
