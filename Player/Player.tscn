@@ -473,6 +473,7 @@ animation = "Attack1"
 speed_scale = 2.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 0, -40 )
 rotating = true
 current = true
 zoom = Vector2( 0.3, 0.3 )

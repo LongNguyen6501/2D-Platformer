@@ -39,16 +39,16 @@ func _physics_process(delta):
 	elif Input.is_action_pressed("ui_right"):
 		face = 1
 		velocity.x += speed * face
-		if is_on_floor() and velocity.x != 0 and currentAnim != "Attack1" and currentAnim != "Dash":
+		if is_on_floor() and velocity.y == 0 and velocity.x != 0 and currentAnim != "Attack1" and currentAnim != "Dash" and currentAnim != "Jump":
 			anim.play("Run")
 	elif Input.is_action_pressed("ui_left"):
 		face = -1
 		velocity.x += speed * face
-		if is_on_floor() and velocity.x != 0 and currentAnim != "Attack1" and currentAnim != "Dash":
+		if is_on_floor() and velocity.y == 0 and velocity.x != 0 and currentAnim != "Attack1" and currentAnim != "Dash" and currentAnim != "Jump":
 			anim.play("Run")
 
 	#idle
-	elif velocity.x == 0 and velocity.y ==0 and currentAnim != "Attack1" and currentAnim != "Dash":
+	elif velocity.x == 0 and velocity.y == 0 and currentAnim != "Attack1" and currentAnim != "Dash":
 		anim.play("Idle")
 
 	#Flip sprite
