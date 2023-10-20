@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://sprites/player/Adventurer Sprite Sheet v1.5.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=20]
@@ -240,7 +240,7 @@ region = Rect2( 224, 32, 32, 32 )
 animations = [ {
 "frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
-"name": "Attack",
+"name": "Attack1",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
@@ -269,13 +269,41 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="Animation" id=55]
+resource_name = "Attack1"
+length = 0.95
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+}
+
 [sub_resource type="Animation" id=54]
 resource_name = "Dash"
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = false
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
@@ -286,8 +314,8 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("AnimatedSprite:frame")
-tracks/1/interp = 2
-tracks/1/loop_wrap = false
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
@@ -302,8 +330,8 @@ resource_name = "Fall"
 length = 0.15
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = false
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
@@ -314,8 +342,8 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("AnimatedSprite:frame")
-tracks/1/interp = 2
-tracks/1/loop_wrap = false
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
@@ -331,8 +359,8 @@ length = 1.25
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = false
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
@@ -343,8 +371,8 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("AnimatedSprite:frame")
-tracks/1/interp = 2
-tracks/1/loop_wrap = false
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
@@ -359,8 +387,8 @@ resource_name = "Jump"
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = false
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
@@ -371,8 +399,8 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("AnimatedSprite:frame")
-tracks/1/interp = 2
-tracks/1/loop_wrap = false
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
@@ -403,8 +431,8 @@ length = 0.75
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = false
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
@@ -415,8 +443,8 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("AnimatedSprite:frame")
-tracks/1/interp = 2
-tracks/1/loop_wrap = false
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
@@ -450,6 +478,7 @@ current = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 method_call_mode = 1
+anims/Attack1 = SubResource( 55 )
 anims/Dash = SubResource( 54 )
 anims/Fall = SubResource( 53 )
 anims/Idle = SubResource( 49 )
