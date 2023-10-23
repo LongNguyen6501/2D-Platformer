@@ -12,7 +12,7 @@
 [ext_resource path="res://sprites/enemy-death/enemy-death-3.png" type="Texture" id=10]
 [ext_resource path="res://sprites/enemy-death/enemy-death-4.png" type="Texture" id=11]
 [ext_resource path="res://sprites/enemy-death/enemy-death-5.png" type="Texture" id=12]
-[ext_resource path="res://Frog.gd" type="Script" id=13]
+[ext_resource path="res://Enemies/Frog.gd" type="Script" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.5, 6 )
