@@ -1,0 +1,82 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://sprites/frog/jump/frog-jump-1.png" type="Texture" id=1]
+[ext_resource path="res://sprites/frog/idle/frog-idle-1.png" type="Texture" id=2]
+[ext_resource path="res://sprites/frog/idle/frog-idle-2.png" type="Texture" id=3]
+[ext_resource path="res://sprites/frog/jump/frog-jump-2.png" type="Texture" id=4]
+[ext_resource path="res://sprites/frog/idle/frog-idle-3.png" type="Texture" id=5]
+[ext_resource path="res://sprites/frog/idle/frog-idle-4.png" type="Texture" id=6]
+[ext_resource path="res://sprites/enemy-death/enemy-death-1.png" type="Texture" id=7]
+[ext_resource path="res://sprites/enemy-death/enemy-death-2.png" type="Texture" id=8]
+[ext_resource path="res://sprites/enemy-death/enemy-death-6.png" type="Texture" id=9]
+[ext_resource path="res://sprites/enemy-death/enemy-death-3.png" type="Texture" id=10]
+[ext_resource path="res://sprites/enemy-death/enemy-death-4.png" type="Texture" id=11]
+[ext_resource path="res://sprites/enemy-death/enemy-death-5.png" type="Texture" id=12]
+[ext_resource path="res://Frog.gd" type="Script" id=13]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6.5, 6 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 35, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 35, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 35, 32 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 9 ) ],
+"loop": false,
+"name": "Death",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 6 ), SubResource( 2 ), SubResource( 2 ), SubResource( 2 ), SubResource( 2 ), SubResource( 2 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 108.005
+
+[sub_resource type="RectangleShape2D" id=7]
+
+[node name="Frog" type="KinematicBody2D"]
+script = ExtResource( 13 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.5, 3 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.8125, 0.8125 )
+frames = SubResource( 5 )
+animation = "Idle"
+
+[node name="PlayerDetection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+shape = SubResource( 6 )
+
+[node name="Death" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Death"]
+shape = SubResource( 7 )
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_PlayerDetection_body_entered"]
+[connection signal="body_exited" from="PlayerDetection" to="." method="_on_PlayerDetection_body_exited"]
+[connection signal="body_entered" from="Death" to="." method="_on_Death_body_entered"]
