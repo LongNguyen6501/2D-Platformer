@@ -14,24 +14,24 @@ func _physics_process(delta):
 	#player gravity code
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	if velocity.y > 0  and currentAnim != "Run" and currentAnim != "Dash" and currentAnim != "Attack1" and currentAnim != "Idle":
+	if velocity.y > 99 and currentAnim != "Dash" and currentAnim != "Attack1":
 		anim.play("Fall")
 
 	#player idle velocity =0
 	velocity.x = 0
 
 	#jump
-	if is_on_floor() or currentAnim == "Run" or currentAnim == "Idle":
+	if currentAnim == "Run" or currentAnim == "Idle":
 		if Input.is_action_just_pressed("ui_jump"):
 			velocity.y = jump_speed
 			anim.play("Jump")
 
-	#attack
+	#attacks
 	if Input.is_action_just_pressed("ui_attack"):
 		anim.play("Attack1")
 
 	#dash
-	elif Input.is_action_just_pressed("ui_dash"):
+	elif Input.is_action_just_pressed("ui_dash") and currentAnim != "Dash":
 		velocity.x += dash_speed * face
 		anim.play("Dash")
 
@@ -61,4 +61,4 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2.UP)
 
 	#debug printing 
-	print(velocity.x, ",", velocity.y)
+	#print(velocity.x, ",", velocity.y)
