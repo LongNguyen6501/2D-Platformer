@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://sprites/player/Adventurer Sprite Sheet v1.5.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=20]
@@ -135,6 +135,46 @@ region = Rect2( 96, 384, 32, 32 )
 flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 128, 384, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=76]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 32, 448, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=77]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 64, 448, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=78]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 96, 448, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=79]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 128, 448, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=80]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 160, 448, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=81]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 192, 448, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=82]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 224, 448, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=83]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 256, 448, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=18]
 flags = 4
@@ -313,6 +353,11 @@ animations = [ {
 "name": "Dash",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 76 ), SubResource( 77 ), SubResource( 78 ), SubResource( 79 ), SubResource( 80 ), SubResource( 81 ), SubResource( 82 ), SubResource( 83 ) ],
+"loop": true,
+"name": "Death",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
 "loop": true,
 "name": "Hurt",
@@ -472,6 +517,34 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ "Dash" ]
+}
+
+[sub_resource type="Animation" id=75]
+resource_name = "Death"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "Death" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 7, 7 ]
 }
 
 [sub_resource type="Animation" id=53]
@@ -670,7 +743,7 @@ __meta__ = {
 position = Vector2( 2.5, -5.5 )
 scale = Vector2( 1.09375, 1.09375 )
 frames = SubResource( 2 )
-animation = "Hurt"
+animation = "Death"
 speed_scale = 2.0
 flip_h = true
 
@@ -679,6 +752,7 @@ offset = Vector2( 0, -40 )
 rotating = true
 current = true
 zoom = Vector2( 0.3, 0.3 )
+smoothing_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
@@ -687,6 +761,7 @@ anims/Attack1 = SubResource( 55 )
 anims/Attack2 = SubResource( 67 )
 anims/Attack3 = SubResource( 68 )
 anims/Dash = SubResource( 54 )
+anims/Death = SubResource( 75 )
 anims/Fall = SubResource( 53 )
 anims/Hurt = SubResource( 70 )
 anims/Idle = SubResource( 49 )
