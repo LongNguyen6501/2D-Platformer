@@ -5,7 +5,7 @@ var player
 var chase = false
 var speed = 50
 onready var anim = get_node("AnimatedSprite")
-
+onready var frogBody = get_node("Death")
 
 func _ready():
 	anim.play("Idle")
@@ -36,10 +36,23 @@ func _on_PlayerDetection_body_exited(body):
 		chase = false
 
 func _on_Death_body_entered(body):
-	if body.name == "Player":
-		chase = false
-		velocity.x = 0
-		anim.play("Death")
-		yield(get_tree().create_timer(1.0), "timeout")
-		self.queue_free()
+	if body.name == "Player" and anim.animation != "Death":
+		body.HP -= 1
+		body.anim.play("Hurt")
+		body.velocity.y -= 200
+		Death()
+		
+func _on_Death_area_entered(area):
+	if area.name == "SwordHitBox":
+		Death()
+
+func Death():
+	remove_child(frogBody)
+	frogBody.queue_free()
+	chase = false
+	velocity.x = 0
+	anim.play("Death")
+	yield(get_tree().create_timer(1.0), "timeout")
+	self.queue_free()
+
 

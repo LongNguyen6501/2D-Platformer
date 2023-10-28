@@ -15,7 +15,7 @@
 [ext_resource path="res://Enemies/Frog.gd" type="Script" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6.5, 6 )
+extents = Vector2( 10, 9 )
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
@@ -54,12 +54,12 @@ animations = [ {
 radius = 108.005
 
 [sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 13.5, 10.25 )
 
 [node name="Frog" type="KinematicBody2D"]
 script = ExtResource( 13 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.5, 3 )
+[node name="Body" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -75,8 +75,12 @@ shape = SubResource( 6 )
 [node name="Death" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Death"]
+position = Vector2( -0.5, -1.75 )
 shape = SubResource( 7 )
 
+[connection signal="hide" from="Body" to="." method="_on_Body_hide"]
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_PlayerDetection_body_entered"]
 [connection signal="body_exited" from="PlayerDetection" to="." method="_on_PlayerDetection_body_exited"]
+[connection signal="area_entered" from="Death" to="." method="_on_Death_area_entered"]
+[connection signal="area_shape_entered" from="Death" to="." method="_on_Death_area_shape_entered"]
 [connection signal="body_entered" from="Death" to="." method="_on_Death_body_entered"]
