@@ -1,18 +1,21 @@
 extends KinematicBody2D
 #declare variable
-var speed = 100
+var speed = 80
 var jump_speed = -300
 var gravity = 1000
 var velocity = Vector2.ZERO
-var dash_speed = 4000
+var dash_speed = 200
+var dash_time = .4
 var face = 1
 var HP = 10
 onready var anim = get_node("AnimationPlayer")
 onready var sword = get_node("SwordHitBox/CollisionShape2D")
+onready var dash = get_node("Dash")
 
 func _physics_process(delta):
 	var currentAnim = anim.get_current_animation()
-
+	if velocity.x == 0 and velocity.y == 0 and currentAnim != "Attack1" and currentAnim != "Dash":
+		anim.play("Idle")
 	#player gravity code
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -31,33 +34,30 @@ func _physics_process(delta):
 	#attacks
 	if Input.is_action_just_pressed("ui_attack") and currentAnim != "Hurt" and currentAnim != "Death":
 		if face == 1:
-			sword.position = Vector2(15, -1)
+			sword.position = Vector2(14, -1)
 		else:
-			sword.position = Vector2(-11, -1)
+			sword.position = Vector2(-10, -1)
 		anim.play("Attack1")
 
 	#dash
-	elif Input.is_action_just_pressed("ui_dash") and currentAnim != "Dash" and currentAnim != "Death":
-		velocity.x += dash_speed * face
-		self.position.normalized()
+	if Input.is_action_just_pressed("ui_dash") and currentAnim != "Dash" and currentAnim != "Death":
+		dash.start_dash(dash_time)
 		anim.play("Dash")
+	if dash.is_dashing():
+		velocity.x = face * dash_speed
+	#run
+	elif Input.is_action_pressed("ui_right"):
+		face = 1
+		velocity.x = face * speed
+	elif Input.is_action_pressed("ui_left"):
+		face = -1
+		velocity.x = face * speed
+	if is_on_floor() and velocity.y == 0 and velocity.x == face * speed and velocity.x != 0 and currentAnim != "Run" and currentAnim != "Attack1" and currentAnim != "Dash" and currentAnim != "Jump":
+			anim.play("Run")
 
 	#go left and right
-	elif Input.is_action_pressed("ui_right") and currentAnim != "Hurt" and currentAnim != "Death":
-		face = 1
-		velocity.x = speed * face
-		if is_on_floor() and velocity.y == 0 and velocity.x != 0 and currentAnim != "Death" and currentAnim != "Attack1" and currentAnim != "Dash" and currentAnim != "Jump":
-			anim.play("Run")
-	elif Input.is_action_pressed("ui_left") and currentAnim != "Hurt" and currentAnim != "Death":
-		face = -1
-		velocity.x += speed * face
-		if is_on_floor() and velocity.y == 0 and velocity.x != 0 and currentAnim != "Attack1" and currentAnim != "Dash" and currentAnim != "Jump":
-			anim.play("Run")
-
-	#idle
-	elif velocity.x == 0 and velocity.y == 0 and currentAnim != "Death" and currentAnim != "Attack1" and currentAnim != "Dash" and currentAnim != "Hurt":
-		anim.play("Idle")
-
+	
+	velocity = move_and_slide(velocity, Vector2.UP)
 	#Flip sprite
 	if face < 0:
 		$AnimatedSprite.flip_h = true
@@ -65,7 +65,7 @@ func _physics_process(delta):
 		$AnimatedSprite.flip_h = false
 
 	#allows player movements
-	velocity = move_and_slide(velocity, Vector2.UP)
+
 	
 	if HP <= 0:
 		velocity.x = 0
@@ -74,7 +74,5 @@ func _physics_process(delta):
 		yield(get_tree().create_timer(1.0), "timeout")
 		get_tree().change_scene("res://Main.tscn")
 	
-
 	#debug printing 
-	#print(velocity.x, ",", velocity.y)
-
+	print(velocity.x, ",", velocity.y)

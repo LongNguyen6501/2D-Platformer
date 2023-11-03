@@ -1,6 +1,7 @@
-[gd_scene load_steps=82 format=2]
+[gd_scene load_steps=83 format=2]
 
 [ext_resource path="res://sprites/player/Adventurer Sprite Sheet v1.5.png" type="Texture" id=1]
+[ext_resource path="res://Player/Dash.gd" type="Script" id=2]
 [ext_resource path="res://Player/Player.gd" type="Script" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -380,7 +381,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=69]
-extents = Vector2( 5.5, 10 )
+extents = Vector2( 4.75, 7 )
 
 [sub_resource type="Animation" id=55]
 resource_name = "Attack1"
@@ -732,7 +733,7 @@ tracks/1/keys = {
 position = Vector2( 96, 433 )
 script = ExtResource( 20 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Body" type="CollisionShape2D" parent="."]
 position = Vector2( 2.5, -0.5 )
 shape = SubResource( 1 )
 __meta__ = {
@@ -743,7 +744,7 @@ __meta__ = {
 position = Vector2( 2.5, -5.5 )
 scale = Vector2( 1.09375, 1.09375 )
 frames = SubResource( 2 )
-animation = "Death"
+animation = "Dash"
 speed_scale = 2.0
 flip_h = true
 
@@ -772,8 +773,14 @@ anims/Run = SubResource( 51 )
 [node name="SwordHitBox" type="Area2D" parent="." groups=["PlayerAttack"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordHitBox"]
-position = Vector2( -11, -1 )
+position = Vector2( -10.25, -1 )
 shape = SubResource( 69 )
 disabled = true
+
+[node name="Dash" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="DashTimer" type="Timer" parent="Dash"]
+one_shot = true
 
 [connection signal="area_entered" from="SwordHitBox" to="." method="_on_SwordHitBox_area_entered"]

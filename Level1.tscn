@@ -59,11 +59,11 @@ texture = ExtResource( 2 )
 offset = Vector2( 168.375, 82.125 )
 
 [node name="Pine" type="Sprite" parent="."]
-position = Vector2( 567, 318 )
+position = Vector2( 568, 319 )
 texture = ExtResource( 8 )
 
 [node name="Pine2" type="Sprite" parent="."]
-position = Vector2( 1050, 286 )
+position = Vector2( 1050, 287 )
 texture = ExtResource( 8 )
 
 [node name="Pine3" type="Sprite" parent="."]
@@ -102,7 +102,7 @@ position = Vector2( 305, 358 )
 position = Vector2( 187, 325 )
 
 [node name="Frog7" parent="Enemies" instance=ExtResource( 4 )]
-position = Vector2( 1144, 325 )
+position = Vector2( 1144, 326 )
 
 [node name="Eagle" parent="Enemies" instance=ExtResource( 6 )]
 position = Vector2( 40, 132 )
@@ -136,6 +136,10 @@ texture = ExtResource( 7 )
 
 [node name="Bush4" type="Sprite" parent="."]
 position = Vector2( 1144, 322 )
+texture = ExtResource( 7 )
+
+[node name="Bush5" type="Sprite" parent="."]
+position = Vector2( 656, 354 )
 texture = ExtResource( 7 )
 
 [node name="UI" type="CanvasLayer" parent="."]
