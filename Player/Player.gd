@@ -17,8 +17,11 @@ onready var jumpR = get_node("JumpR")
 
 func _physics_process(delta):
 	var currentAnim = anim.get_current_animation()
+
+	#player idle animation
 	if velocity.x == 0 and velocity.y == 0 and currentAnim != "Attack1" and currentAnim != "Dash":
 		anim.play("Idle")
+
 	#player gravity code
 	if not is_on_floor() and currentAnim != "Death":
 		velocity.y += gravity * delta
@@ -62,6 +65,7 @@ func _physics_process(delta):
 		anim.play("Dash")
 	if dash.is_dashing():
 		velocity.x = face * dash_speed
+
 	#run
 	elif Input.is_action_pressed("ui_right") and currentAnim != "Death":
 		face = 1
@@ -72,8 +76,7 @@ func _physics_process(delta):
 	if is_on_floor() and velocity.y == 0 and velocity.x == face * speed and velocity.x != 0 and currentAnim != "Run" and currentAnim != "Attack1" and currentAnim != "Dash" and currentAnim != "Jump":
 			anim.play("Run")
 
-	#go left and right
-	
+	#allow player movement
 	velocity = move_and_slide(velocity, Vector2.UP)
 	#Flip sprite
 	if face < 0:
@@ -81,9 +84,7 @@ func _physics_process(delta):
 	elif face > 0:
 		$AnimatedSprite.flip_h = false
 
-	#allows player movements
-
-	
+#Death
 	if HP <= 0:
 		velocity.x = 0
 		velocity.y = 0
