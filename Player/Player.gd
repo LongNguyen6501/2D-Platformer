@@ -12,8 +12,6 @@ var HP = 10
 onready var anim = get_node("AnimationPlayer")
 onready var sword = get_node("SwordHitBox/CollisionShape2D")
 onready var dash = get_node("Dash")
-onready var jumpL = get_node("JumpL")
-onready var jumpR = get_node("JumpR")
 
 func _physics_process(delta):
 	var currentAnim = anim.get_current_animation()
@@ -38,16 +36,14 @@ func _physics_process(delta):
 			anim.play("Jump")
 		elif Input.is_action_just_pressed("ui_jump_left") and currentAnim != "Hurt" and currentAnim != "Death":
 			velocity.y = jump_speed
-			jumpL.start_jump(jump_time)
 			anim.play("Jump")
 		elif Input.is_action_just_pressed("ui_jump_right") and currentAnim != "Hurt" and currentAnim != "Death":
 			velocity.y = jump_speed
-			jumpR.start_jump(jump_time)
 			anim.play("Jump")
-	if jumpL.is_jumping():
+	if Input.is_action_pressed("ui_jump_left") and velocity.y != 0:
 		velocity.x = speed * -1
 		face = -1
-	elif jumpR.is_jumping():
+	elif Input.is_action_pressed("ui_jump_right") and velocity.y != 0:
 		velocity.x = speed
 		face = 1
 

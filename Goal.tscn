@@ -1,0 +1,43 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://sprites/cherry/cherry-7.png" type="Texture" id=1]
+[ext_resource path="res://sprites/cherry/cherry-1.png" type="Texture" id=2]
+[ext_resource path="res://sprites/cherry/cherry-6.png" type="Texture" id=3]
+[ext_resource path="res://sprites/cherry/cherry-5.png" type="Texture" id=4]
+[ext_resource path="res://sprites/cherry/cherry-2.png" type="Texture" id=5]
+[ext_resource path="res://sprites/cherry/cherry-3.png" type="Texture" id=6]
+[ext_resource path="res://sprites/cherry/cherry-4.png" type="Texture" id=7]
+[ext_resource path="res://Goal.gd" type="Script" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 9, 8.5 )
+
+[node name="Goal" type="KinematicBody2D"]
+script = ExtResource( 8 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+
+[node name="PhysicalBody" type="CollisionShape2D" parent="."]
+position = Vector2( -2, 0 )
+shape = SubResource( 2 )
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2( -2, -0.5 )
+shape = SubResource( 3 )
+
+[connection signal="child_entered_tree" from="." to="." method="_on_Goal_child_entered_tree"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_HitBox_body_entered"]

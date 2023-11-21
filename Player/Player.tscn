@@ -1,12 +1,10 @@
-[gd_scene load_steps=89 format=2]
+[gd_scene load_steps=87 format=2]
 
 [ext_resource path="res://sprites/player/Adventurer Sprite Sheet v1.5.png" type="Texture" id=1]
 [ext_resource path="res://Player/Dash.gd" type="Script" id=2]
 [ext_resource path="res://sprites/player/dash.jpg" type="Texture" id=3]
 [ext_resource path="res://sprites/player/jump.jpg" type="Texture" id=4]
 [ext_resource path="res://sprites/player/directionjump.jpg" type="Texture" id=5]
-[ext_resource path="res://Player/Jump.gd" type="Script" id=6]
-[ext_resource path="res://Player/JumpR.gd" type="Script" id=7]
 [ext_resource path="res://Player/Player.gd" type="Script" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -835,7 +833,7 @@ action = "ui_attack"
 
 [node name="Attack2" type="TouchScreenButton" parent="TouchScreenButtons"]
 position = Vector2( -22, -114 )
-scale = Vector2( 2.278, 8.11 )
+scale = Vector2( 9.645, 8.11 )
 shape = SubResource( 84 )
 passby_press = true
 action = "ui_attack"
@@ -888,17 +886,5 @@ scale = Vector2( 5.173, 1.031 )
 shape = SubResource( 84 )
 passby_press = true
 action = "ui_dash"
-
-[node name="JumpL" type="Node2D" parent="."]
-script = ExtResource( 6 )
-
-[node name="JumpTimerL" type="Timer" parent="JumpL"]
-one_shot = true
-
-[node name="JumpR" type="Node2D" parent="."]
-script = ExtResource( 7 )
-
-[node name="JumpTimerR" type="Timer" parent="JumpR"]
-one_shot = true
 
 [connection signal="area_entered" from="SwordHitBox" to="." method="_on_SwordHitBox_area_entered"]

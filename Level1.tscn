@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/Background/back.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Enemies/Eagle.tscn" type="PackedScene" id=6]
 [ext_resource path="res://sprites/Props/bush.png" type="Texture" id=7]
 [ext_resource path="res://sprites/Props/pine.png" type="Texture" id=8]
+[ext_resource path="res://Goal.tscn" type="PackedScene" id=9]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -129,6 +130,9 @@ texture = ExtResource( 7 )
 [node name="Bush2" type="Sprite" parent="."]
 position = Vector2( 441, 226 )
 texture = ExtResource( 7 )
+
+[node name="Goal" parent="Bush2" instance=ExtResource( 9 )]
+position = Vector2( 378, 4 )
 
 [node name="Bush3" type="Sprite" parent="."]
 position = Vector2( 512, 370 )
